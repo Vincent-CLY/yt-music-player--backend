@@ -1,15 +1,16 @@
-const express = require('express');
-const fetchPlaylistData = require('../services/fetchPlaylistData');
+import express from "express";
+import fetchPlaylistData from "../services/fetchPlaylistData.js";
+
 const router = express.Router();
 
-router.get('/fetchPlaylist/:id', async (req, res) => {
-    const playlistId = req.params.id;
-    try {
-      const data = await fetchPlaylistData(playlistId);
-      res.json(data);
-    } catch (error) {
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  });
+router.get("/playlists/:id", async (req, res) => {
+  const playlistId = req.params.id;
+  try {
+    const data = await fetchPlaylistData(playlistId);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
-module.exports =router;
+export default router;

@@ -1,19 +1,22 @@
-const { default: axios } = require('axios');
-const fetch = require('axios');
-
-const playlistID = 'PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc'; // Just for testing
-const baseURL = 'https://inv.nadeko.net/api/v1/playlists/';
+import axios from "axios"
+import Innertube from "youtubei.js"
+const youtube = await Innertube.create()
+const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc" // Just for testing
 
 async function fetchPlaylistData(playlistID) {
-    const apiURL = `${baseURL}${playlistID}`;
-    try {
-        const res = await axios.get(apiURL);
-        console.log(res);
-        return res.data;
-    } catch (erorr) {
-        console.error('Error fetching data: ', error);
-        throw error;
-    }
-};
+    let playlist = await youtube.getPlaylist(playlistID)
+    let playlistItems = Array.from(playlist.items)
+    console.log(playlistItems.length) // 100
 
-module.exports = fetchPlaylistData;
+    // fetch all data until the end
+    while (playlist.has_continuation) {
+    playlist = await playlist.getContinuation()
+
+    playlistItems = playlistItems.concat(playlist.items)
+    }
+
+    console.log(playlistItems.length) // 598
+}
+
+// Use ES module export
+export default fetchPlaylistData;

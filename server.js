@@ -1,14 +1,14 @@
-const express = require('express');
+import express from "express";
+import apiFetchPlaylist from "./routes/fetchPlaylist.js";
+
 const app = express();
 const port = 3000;
 
-const apiFetchPlaylist = require('./routes/fetchPlaylist');
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
-app.use('/api', apiFetchPlaylist);
+app.use("/api", apiFetchPlaylist);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
