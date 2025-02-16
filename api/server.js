@@ -33,7 +33,7 @@ app.get("/playlists/:id", async (req, res) => {
   const playlistId = req.params.id;
   try {
     const data = await fetchPlaylistData(playlistId);
-    res.send(data)
+    res.send(playlistId)
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
