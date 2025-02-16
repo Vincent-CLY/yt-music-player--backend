@@ -19,7 +19,7 @@ async function fetchPlaylistData(playlistID) {
   }
   
   console.log(playlistItems.length);
-  return playlist.items
+  return playlist
 }
 
 // Use ES module export
