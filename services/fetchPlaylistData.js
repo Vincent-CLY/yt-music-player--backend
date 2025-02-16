@@ -8,6 +8,7 @@ async function fetchPlaylistData(playlistID) {
   let playlistItems = Array.from(playlist.items);
   console.log(playlist.info.total_items); // ['items', 'has_continuation', 'continuation']
   console.log(playlist.items);
+  return playlist
   for (let i = 0; i < playlist.info.total_items; i++) {
     
   }
@@ -19,7 +20,6 @@ async function fetchPlaylistData(playlistID) {
   }
   
   console.log(playlistItems.length);
-  return playlist
 }
 
 // Use ES module export
