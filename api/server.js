@@ -32,7 +32,6 @@ app.get("/", (req, res) => {
 app.get("/playlists/:id", async (req, res) => {
   const playlistId = req.params.id;
   try {
-    res.send(playlistId)
     const data = await fetchPlaylistData(playlistId);
     res.send(data)
     res.json(data);
