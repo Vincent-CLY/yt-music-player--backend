@@ -30,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/playlists/:id", async (req, res) => {
+  res.send('Fetching Playlist...')
   const playlistId = req.params.id;
   try {
     const data = await fetchPlaylistData(playlistId);
@@ -39,7 +40,7 @@ app.get("/playlists/:id", async (req, res) => {
   }
 });
 
-app.use("/api", apiFetchPlaylist);
+// app.use("/api", apiFetchPlaylist);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
