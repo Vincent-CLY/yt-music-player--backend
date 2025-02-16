@@ -18,7 +18,7 @@ async function fetchPlaylistData(playlistID) {
     playlistItems = playlistItems.concat(playlist.items);
   }
 
-  console.log(playlistItems.length); // 598
+  console.log(playlistItems.length);
 }
 
 // Use ES module export
