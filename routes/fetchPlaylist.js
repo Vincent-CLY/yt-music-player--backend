@@ -7,8 +7,8 @@ router.get("/playlists/:id", async (req, res) => {
   const playlistId = req.params.id;
   try {
     const data = await fetchPlaylistData(playlistId);
-    res.send(playlistId)
     res.json(data);
+    res.send(playlistId)
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
   }
