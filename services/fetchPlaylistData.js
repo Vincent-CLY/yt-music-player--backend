@@ -14,11 +14,12 @@ async function fetchPlaylistData(playlistID) {
   // fetch all data until the end
   while (playlist.has_continuation) {
     playlist = await playlist.getContinuation();
-
+    
     playlistItems = playlistItems.concat(playlist.items);
   }
-
+  
   console.log(playlistItems.length);
+  return playlist.items
 }
 
 // Use ES module export

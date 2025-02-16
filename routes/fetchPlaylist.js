@@ -7,7 +7,6 @@ router.get("/playlists/:id", async (req, res) => {
   const playlistId = req.params.id
   try {
     const data = await fetchPlaylistData(playlistId);
-    console.log(`Fetched data for playlist ID: ${playlistId}`, data);
     res.send(`
       <html>
       <body>
