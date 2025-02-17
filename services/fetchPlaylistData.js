@@ -16,10 +16,10 @@ async function fetchPlaylistData(playlistID) {
   console.log(playlistItems.length);
   return playlistItems.map(item => ({
     id: item.id,
-    title: item.title[text],
+    title: item.title.text,
     thumbnail: item.thumbnails[0],
-    author: item.author[name],
-    duration: item.duration[seconds]
+    author: item.author.name,
+    duration: item.duration.seconds
   }))
 }
 
