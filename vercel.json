@@ -10,12 +10,9 @@
       {
         "src": "/(.*)",
         "dest": "/api/server.js",
-        "headers": [
-          { "key": "Access-Control-Allow-Credentials", "value": "true" },
-          { "key": "Access-Control-Allow-Origin", "value": "https://vitejsviteeestp8it-y5f1--5173--7f809d15.local-corp.webcontainer.io" },
-          { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-          { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
-        ]
+        "headers": {
+          "Access-Control-Allow-Origin": "https://vitejsviteeestp8it-y5f1--5173--7f809d15.local-corp.webcontainer.io" 
+        }
       }
     ]
   }
