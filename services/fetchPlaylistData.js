@@ -9,11 +9,9 @@ async function fetchPlaylistData(playlistID) {
   // fetch all data until the end
   while (playlist.has_continuation) {
     playlist = await playlist.getContinuation();
-    return playlist;
-    
-    
     playlistItems = playlistItems.concat(playlist.items);
   }
+  return playlist;
   
   console.log(playlistItems.length);
   return playlistItems.map(item => ({
