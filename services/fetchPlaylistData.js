@@ -7,10 +7,11 @@ async function fetchPlaylistData(playlistID) {
   let playlist = await youtube.getPlaylist(playlistID);
   // let playlistItems = Array.from(playlist.items);
   let counter = playlist.items.length;
-  console.log(counter);
+  console.log(playlist.getContinuationData());
   // fetch all data until the end
   while (playlist.has_continuation) {
     playlist = await playlist.getContinuation();
+    
     // playlistItems = playlistItems.concat(playlist.items);
     counter += playlist.items.length;
   }
