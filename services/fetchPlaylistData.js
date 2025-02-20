@@ -34,8 +34,8 @@ async function fetchPlaylistData(playlistID, sendData) {
   // console.log(`Total items fetched: ${playlistItems.length}`);
   // console.timeEnd("Total Execution Time");
   // return playlistItems;
-
-  console.log(playlistItems.length);
+  
+  // console.log(playlistItems.length);
 }
 
 // Use ES module export
