@@ -14,16 +14,16 @@ const extract = (items) => {
 }
 
 async function fetchPlaylistData(playlistID, sendData) {
-  console.time("Total Execution Time");
-  console.time("Fetching Time");
+  // console.time("Total Execution Time");
+  // console.time("Fetching Time");
   let playlist = await youtube.getPlaylist(playlistID);
   sendData(playlist.info.total_items);
   // let playlistItems = Array.from(extract(playlist.items));
   sendData(extract(playlist.items));
-  console.timeEnd("Fetching Time");
+  // console.timeEnd("Fetching Time");
   // fetch all data until the end
   while (playlist.has_continuation) {
-    console.time("Fetching Continuation");
+    // console.time("Fetching Continuation");
     playlist = await playlist.getContinuation();
     // console.timeEnd("Fetching Continuation");
     // console.time('Concatenation Time');
