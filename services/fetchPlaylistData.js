@@ -11,6 +11,10 @@ async function fetchPlaylistData(playlistID) {
     playlist = await playlist.getContinuation();
     playlistItems = playlistItems.concat(playlist.items);
   }
+  if (playlist.has_continuation) {
+    playlist = await playlist.getContinuation();
+    playlistItems = playlistItems.concat(playlist.items);
+  }
   return playlistItems.map(item => ({
     id: item.id,
     title: item.title.text,
