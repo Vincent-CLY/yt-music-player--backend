@@ -19,7 +19,7 @@ async function fetchPlaylistData(playlistID, sendData) {
   let playlist = await youtube.getPlaylist(playlistID);
   sendData(playlist.info.total_items);
   // let playlistItems = Array.from(extract(playlist.items));
-  sendData(extract(playlist));
+  sendData(extract(playlist.items));
   console.timeEnd("Fetching Time");
   // fetch all data until the end
   while (playlist.has_continuation) {
@@ -28,7 +28,7 @@ async function fetchPlaylistData(playlistID, sendData) {
     // console.timeEnd("Fetching Continuation");
     // console.time('Concatenation Time');
     // playlistItems = playlistItems.concat(extract(playlist.items));
-    sendData(extract(playlist));
+    sendData(extract(playlist.items));
     // console.timeEnd('Concatenation Time')
   }
   // console.log(`Total items fetched: ${playlistItems.length}`);
