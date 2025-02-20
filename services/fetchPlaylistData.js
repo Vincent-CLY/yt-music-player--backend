@@ -7,13 +7,10 @@ async function fetchPlaylistData(playlistID) {
   let playlist = await youtube.getPlaylist(playlistID);
   let playlistItems = Array.from(playlist.items);
   // fetch all data until the end
-  return playlistItems;
-  while (playlist.has_continuation) {
+  if (playlist.has_continuation) {
     playlist = await playlist.getContinuation();
     playlistItems = playlistItems.concat(playlist.items);
   }
-
-  console.log(playlistItems.length);
   return playlistItems.map(item => ({
     id: item.id,
     title: item.title.text,
@@ -21,6 +18,9 @@ async function fetchPlaylistData(playlistID) {
     author: item.author.name,
     duration: item.duration.seconds
   }))
+  return playlistItems;
+
+  console.log(playlistItems.length);
 }
 
 // Use ES module export
