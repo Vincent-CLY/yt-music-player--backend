@@ -7,10 +7,14 @@ async function fetchPlaylistData(playlistID) {
   let playlist = await youtube.getPlaylist(playlistID);
   let playlistItems = Array.from(playlist.items);
   // fetch all data until the end
-  // if (playlist.has_continuation) {
-  //   playlist = await playlist.getContinuation();
-  //   playlistItems = playlistItems.concat(playlist.items);
-  // }
+  if (playlist.has_continuation) {
+    playlist = await playlist.getContinuation();
+    playlistItems = playlistItems.concat(playlist.items);
+  }
+  if (playlist.has_continuation) {
+    playlist = await playlist.getContinuation();
+    playlistItems = playlistItems.concat(playlist.items);
+  }
   return playlistItems.map(item => ({
     id: item.id,
     title: item.title.text,
