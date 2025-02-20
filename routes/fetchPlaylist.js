@@ -8,6 +8,7 @@ router.get("/playlists/:id", async (req, res) => {
   try {
     const data = await fetchPlaylistData(playlistId);
     console.log(data);
+    console.log(data.length);
     res.json(data)
   } catch (error) {
     console.error(`Error fetching playlist data for ID: ${playlistId}`, error)
