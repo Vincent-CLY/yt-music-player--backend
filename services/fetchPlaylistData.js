@@ -6,7 +6,7 @@ const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc"; // Just for testing
 async function fetchPlaylistData(playlistID) {
   let playlist = await youtube.getPlaylist(playlistID);
   let playlistItems = Array.from(playlist.items);
-  return playlist.getContinuationData()
+  return (await playlist.getContinuation()).items;
   // fetch all data until the end
   // while (playlist.has_continuation) {
   //   playlist = await playlist.getContinuation();
