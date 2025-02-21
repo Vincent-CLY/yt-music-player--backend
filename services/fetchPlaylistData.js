@@ -5,7 +5,7 @@ const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc"; // Just for testing
 
 async function fetchPlaylistData(playlistID, res) {
   let playlist = await youtube.getPlaylist(playlistID);
-  res.write(plalylist.info.total_items);
+  res.write(playlist);
   res.flush();
   let playlistItems = Array.from(playlist.items.map(item => ({
     id: item.id,
