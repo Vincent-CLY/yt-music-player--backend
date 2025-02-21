@@ -29,6 +29,7 @@ async function fetchPlaylistData(playlistID, res) {
     console.log(JSON.stringify(playlistItems))
     res.write(JSON.stringify(playlistItems))
   }
+  res.end('Finish Sending...')
   // console.log(playlistItems.length);
 }
 
