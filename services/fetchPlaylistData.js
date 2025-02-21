@@ -3,10 +3,8 @@ import Innertube from "youtubei.js";
 const youtube = await Innertube.create();
 const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc"; // Just for testing
 
-async function fetchPlaylistData(playlistID, res) {
+async function fetchPlaylistData(playlistID) {
   let playlist = await youtube.getPlaylist(playlistID);
-  res.write(JSON.stringify(playlist.info.total_items));
-  res.flush();
   let playlistItems = Array.from(playlist.items.map(item => ({
     id: item.id,
     title: item.title.text,
@@ -14,8 +12,6 @@ async function fetchPlaylistData(playlistID, res) {
     author: item.author.name,
     duration: item.duration.seconds
   })));
-  res.write(JSON.stringify(playlistItems));
-  res.flush();
 
   // fetch all data until the end
   while (playlist.has_continuation) {
@@ -27,8 +23,6 @@ async function fetchPlaylistData(playlistID, res) {
       author: item.author.name,
       duration: item.duration.seconds
     })));;
-    res.write(JSON.stringify(playlistItems));
-    res.flush();
   }
   return playlistItems;
 
