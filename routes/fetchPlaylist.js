@@ -4,7 +4,7 @@ import fetchPlaylistData from "../services/fetchPlaylistData.js"
 const router = express.Router()
 
 router.get("/playlists/:id", async (req, res) => {
-  res.setHeader('Content-Type', 'text/even-stream')
+  res.setHeader('Content-Type', 'text/event-stream')
   res.setHeader('Cache-Control', 'no-cache')
   res.setHeader('Connection', 'keep-alive')
 
