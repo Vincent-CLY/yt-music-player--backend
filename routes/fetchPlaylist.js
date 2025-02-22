@@ -9,10 +9,14 @@ router.get("/playlists/:id", async (req, res) => {
   res.setHeader('Connection', 'keep-alive')
   res.flushHeaders()
   const playlistId = req.params.id
+  req.on('close', () => {
+    // Clean up resources
+    res.end();
+  });
   try {
     await fetchPlaylistData(playlistId, res);
     // console.log(data.length);
-    res.write('event: complete\ndata: Closing Connection...\n\n')
+    res.write('event: complete\ndata: {"status": "complete"}\n\n');
     res.end()
     // res.json(data)
   } catch (error) {
