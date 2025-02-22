@@ -12,6 +12,7 @@ router.get("/playlists/:id", async (req, res) => {
   try {
     await fetchPlaylistData(playlistId, res);
     // console.log(data.length);
+    res.write('event: complete\ndata: Closing Connection...\n\n')
     res.end()
     // res.json(data)
   } catch (error) {
