@@ -29,10 +29,6 @@ async function fetchPlaylistData(playlistID, res) {
     console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
   }
-  res.on('close', () => {
-    console.log('Closing Connection...')
-    res.end()
-  })
   // console.log(playlistItems.length);
 }
 
