@@ -14,10 +14,12 @@ router.get("/playlists/:id", async (req, res) => {
     res.end();
   });
   try {
-    await fetchPlaylistData(playlistId, res);
+    const status = await fetchPlaylistData(playlistId, res);
     // console.log(data.length);
-    res.write('event: complete\ndata: {"status": "complete"}\n\n');
-    res.end()
+    if (status == 'complete') {
+      res.write('event: complete\ndata: {"status": "complete"}\n\n');
+      res.end()
+    }
     // res.json(data)
   } catch (error) {
     console.error(`Error fetching playlist data for ID: ${playlistId}`, error)

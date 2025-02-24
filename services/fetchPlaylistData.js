@@ -30,9 +30,12 @@ async function fetchPlaylistData(playlistID, res) {
       console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
       res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     }
+    return 'complete'
   } catch (error) {
     console.log(error)
-    res.end()
+    res.write('event: playlistFetchFailed\n');
+    res.end();
+    return 'playlistFetchFailed'
   }
   // console.log(playlistItems.length);
 }
