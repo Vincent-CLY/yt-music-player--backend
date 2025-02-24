@@ -32,7 +32,7 @@ async function fetchPlaylistData(playlistID, res) {
     }
   } catch (error) {
     console.log(error)
-    return error
+    res.end()
   }
   // console.log(playlistItems.length);
 }
