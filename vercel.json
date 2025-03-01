@@ -11,8 +11,7 @@
         "src": "/(.*)",
         "dest": "/api/server.js",
         "headers": {
-          "Access-Control-Allow-Origin": "https://vitejsviteeestp8it-y5f1--5173--31ca1d38.local-corp.webcontainer.io
-            " 
+          "Access-Control-Allow-Origin": "https://vitejsviteeestp8it-y5f1--5173--31ca1d38.local-corp.webcontainer.io" 
         }
       }
     ]
