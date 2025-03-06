@@ -11,7 +11,10 @@
         "src": "/(.*)",
         "dest": "/api/server.js",
         "headers": {
-          "Access-Control-Allow-Origin": "https://vitejsviteeestp8it-y5f1--5173--495c5120.local-corp.webcontainer.io" 
+          "Access-Control-Allow-Origin": '''
+            https://yt-music-player.vercel.app,
+            https://ytmusicplayerfrontend-mp3y--5173--495c5120.local-credentialless.webcontainer.io
+            '''
         }
       }
     ]
