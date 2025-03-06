@@ -10,7 +10,7 @@
       {
         "src": "/(.*)",
         "dest": "/api/server.js",
-        "headers": [
+        "headers": {
             {
               "key": "Access-Control-Allow-Origin",
               "value": "https://yt-music-player.vercel.app"
@@ -19,7 +19,7 @@
               "key": "Access-Control-Allow-Origin",
               "value": "https://ytmusicplayerfrontend-mp3y--5173--495c5120.local-credentialless.webcontainer.io"
             }
-        ]
+        }
       }
     ]
 }
