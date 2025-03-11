@@ -5,6 +5,8 @@ const YTDlpWrap = pkg.default; // Access the default export
 
 const router = express.Router();
 const ytDlp = new YTDlpWrap(path.resolve("../yt-dlp/yt-dlp_linux"));
+let help = await ytDlpWrap.getHelp();
+console.log(help);
 // const ytDlp = new YTDlpWrap("../yt-dlp/yt-dlp_linux"); 
 
 // Route for streaming video
@@ -30,7 +32,7 @@ router.get("/:videoID", async (req, res) => {
         console.error("Stream error:", err);
         res.status(500).send("Error processing video stream.");
     });
-    
+
     ytDlpProcess.stdout.pipe(res); // Pipe the video stream to the response
 
     ytDlpProcess.stderr.on("data", (data) => {
