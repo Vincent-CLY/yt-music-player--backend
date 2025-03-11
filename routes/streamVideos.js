@@ -26,6 +26,11 @@ router.get("/:videoID", async (req, res) => {
     ]);
 
     res.setHeader("Content-Type", "video/mp4"); // Set content type for MP4
+    ytDlpProcess.stdout.on("error", (err) => {
+        console.error("Stream error:", err);
+        res.status(500).send("Error processing video stream.");
+    });
+    
     ytDlpProcess.stdout.pipe(res); // Pipe the video stream to the response
 
     ytDlpProcess.stderr.on("data", (data) => {
