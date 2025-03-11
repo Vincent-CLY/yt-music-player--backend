@@ -1,11 +1,11 @@
 import express from "express";
 import pkg from "yt-dlp-wrap"; // Import the entire package
 const YTDlpWrap = pkg.default; // Access the default export
-let help = await ytDlpWrap.getHelp();
-console.log(`Help: ${help}`);
 
 const router = express.Router();
 const ytDlp = new YTDlpWrap("/workspaces/yt-music-player--backend/yt-dlp/yt-dlp_linux");
+let help = await ytDlp.getHelp();
+console.log(`Help: ${help}`);
 // const ytDlp = new YTDlpWrap("../yt-dlp/yt-dlp_linux"); 
 
 // Route for streaming video
