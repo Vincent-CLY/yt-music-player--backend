@@ -1,9 +1,11 @@
 import express from "express";
 import pkg from "yt-dlp-wrap"; // Import the entire package
+import path from "path";
 const YTDlpWrap = pkg.default; // Access the default export
 
 const router = express.Router();
-const ytDlp = new YTDlpWrap("../yt-dlp/yt-dlp_linux"); // Specify path to yt-dlp binary
+const ytDlp = new YTDlpWrap(path.resolve("../yt-dlp/yt-dlp_linux"));
+// const ytDlp = new YTDlpWrap("../yt-dlp/yt-dlp_linux"); 
 
 // Route for streaming video
 router.get("/:videoID", async (req, res) => {
