@@ -1,5 +1,5 @@
 import express from "express";
-import YTDlpWrap from "yt-dlp-wrap"; // Import yt-dlp-wrap using ES Modules
+import { YTDlpWrap } from "yt-dlp-wrap"; // Import yt-dlp-wrap using ES Modules
 
 const router = express.Router();
 const ytDlp = new YTDlpWrap("../yt-dlp/yt-dlp_linux"); // Specify path to yt-dlp binary
