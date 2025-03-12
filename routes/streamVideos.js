@@ -15,7 +15,8 @@ router.get("/:videoID", async (req, res) => {
         noCheckCertificates: true,
         noWarnings: true,
         preferFreeFormats: true,
-        addHeader: ['referer:youtube.com', 'user-agent:googlebot']
+        addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
+        cookiesFromBrowser: 'chrome' // or 'firefox' based on the user's browser
       });
       console.log(output);
       res.status(200).json(output);
