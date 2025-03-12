@@ -14,12 +14,31 @@ router.get("/:videoID", async (req, res) => {
         dumpSingleJson: true,
         noCheckCertificates: true,
         noWarnings: true,
-        preferFreeFormats: true,
         addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
-        cookiesFromBrowser: 'edge' // or 'firefox' based on the user's browser
+        cookies: "/workspaces/yt-music-player--backend/youtube.com_cookies.txt",
+        f: 'bv*+ba/b', // Adjust format as needed
       });
-      console.log(output);
-      res.status(200).json(output);
+      console.log(output.requested_downloads[0].requested_formats[0])
+      const videoURL = output.requested_formats[0].url;
+      const audioURL = output.requested_formats[1].url;
+      console.log(`Video: ${videoURL}`);
+      console.log(`Audio: ${audioURL}`);
+      res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Video Streaming</title>
+        </head>
+        <body>
+            <video id="videoPlayer" controls width="600">
+                <source src="${videoURL}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </body>
+        </html>
+      `);
     } catch (error) {
       console.error('Error downloading video:', error);
       res.status(500).json({ error: 'Error downloading video' });
