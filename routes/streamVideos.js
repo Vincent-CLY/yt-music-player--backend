@@ -17,6 +17,7 @@ router.get("/:videoID", async (req, res) => {
         addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
         cookies: "/workspaces/yt-music-player--backend/youtube.com_cookies.txt",
         f: 'bv*+ba/b', // Adjust format as needed
+        geoBypass: true,
       });
       console.log(output.requested_downloads[0].requested_formats[0])
       const videoURL = output.requested_formats[0].url;
