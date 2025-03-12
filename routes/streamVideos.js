@@ -1,5 +1,5 @@
 import express from "express";
-import { exec } from "yt-dlp-exec";
+import { exec } from "youtube-dl-exec";
 
 const router = express.Router();
 
