@@ -19,7 +19,7 @@ router.get("/:videoID", async (req, res) => {
         f: 'bv*+ba/b', // Adjust format as needed
         geoBypass: true,
       });
-      console.log(output.requested_downloads[0].requested_formats[0])
+      console.log(output);
       const videoURL = output.requested_formats[0].url;
       const audioURL = output.requested_formats[1].url;
       console.log(`Video: ${videoURL}`);
