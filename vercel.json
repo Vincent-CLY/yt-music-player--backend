@@ -11,7 +11,7 @@
         "src": "/(.*)",
         "dest": "/api/server.js",
         "headers": {
-            "Access-Control-Allow-Origin": "https://ytmusicplayerfrontend-mp3y--5173--853a9fbb.local-corp.webcontainer.io"
+            "Access-Control-Allow-Origin": "https://vitejsviteeestp8it-y5f1--5173--5a421e5b.local-credentialless.webcontainer.io"
         }
       }
     ]
