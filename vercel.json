@@ -11,7 +11,7 @@
         "src": "/(.*)",
         "dest": "/api/server.js",
         "headers": {
-            "Access-Control-Allow-Origin": "https://orange-space-winner-qrx696v4rrvfx9v5-5173.app.github.dev"
+            "Access-Control-Allow-Origin": "https://refactored-doodle-r9xwrw76q9jfw7vj-5173.app.github.dev/"
         }
       }
     ]
