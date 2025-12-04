@@ -15,7 +15,8 @@ async function fetchPlaylistData(playlistID, res) {
       author: item.author.name,
       duration: item.duration.seconds
     }));
-    console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
+    // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
+    console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     // fetch all data until the end
     while (playlist.has_continuation) {
@@ -27,7 +28,8 @@ async function fetchPlaylistData(playlistID, res) {
         author: item.author.name,
         duration: item.duration.seconds
       }));
-      console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
+      // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
+      console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
       res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     }
     return 'complete'
