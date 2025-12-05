@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import Innertube from "youtubei.js";
 const youtube = await Innertube.create();
 const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc"; // Just for testing
