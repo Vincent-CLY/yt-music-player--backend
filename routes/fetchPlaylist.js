@@ -14,7 +14,9 @@ router.get("/playlists/:id", async (req, res) => {
     res.end();
   });
   try {
+    console.time('FetchPlaylist');
     const status = await fetchPlaylistData(playlistId, res);
+    console.timeEnd('FetchPlaylist');
     // console.log(data.length);
     if (status == 'complete') {
       res.write('event: complete\ndata: {"status": "complete"}\n\n');
