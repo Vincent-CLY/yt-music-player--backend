@@ -8,6 +8,9 @@ async function fetchPlaylistData(playlistID, res) {
   try {
     let playlist = await youtube.getPlaylist(playlistID);
     console.log(`data: ${JSON.stringify(playlist.info.total_items)}\n\n`)
+    if (playlistItems.length < 100) {
+        res.write(`\n\n=== ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
+    }
     res.write(`data: ${JSON.stringify(playlist.info.total_items)}\n\n`)
     let playlistItems = playlist.items.map(item => ({
       id: item.id,
@@ -23,6 +26,9 @@ async function fetchPlaylistData(playlistID, res) {
     // fetch all data until the end
     while (playlist.has_continuation) {
       playlist = await playlist.getContinuation();
+      if (playlistItems.length < 100) {
+        res.write(`\n\n=== ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
+      }
       playlistItems = playlist.items.map(item => ({
         id: item.id,
         title: item.title.text,
