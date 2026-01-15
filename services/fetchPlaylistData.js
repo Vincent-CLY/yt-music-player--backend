@@ -16,7 +16,7 @@ async function fetchPlaylistData(playlistID, res) {
       author: item.author.name,
       duration: item.duration.seconds
     }));
-    if (playlistItems.length < 100) {
+    if (playlistItems.length < 50) {
         res.write(`\n\n=== Newly Updated Playlist Total Length ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
     }
     length += playlistItems.length;
@@ -26,7 +26,7 @@ async function fetchPlaylistData(playlistID, res) {
     // fetch all data until the end
     while (playlist.has_continuation) {
       playlist = await playlist.getContinuation();
-      if (playlistItems.length < 100) {
+      if (playlistItems.length < 50) {
         res.write(`\n\n=== Newly Updated Playlist Total Length ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
       }
       playlistItems = playlist.items.map(item => ({
