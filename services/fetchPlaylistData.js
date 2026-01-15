@@ -1,6 +1,7 @@
 // import axios from "axios";
 import Innertube from "youtubei.js";
 const youtube = await Innertube.create();
+const length = 0;
 const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc"; // Just for testing
 
 async function fetchPlaylistData(playlistID, res) {
@@ -15,6 +16,7 @@ async function fetchPlaylistData(playlistID, res) {
       author: item.author.name,
       duration: item.duration.seconds
     }));
+    length += playlist.length;
     // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
     console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
@@ -28,6 +30,7 @@ async function fetchPlaylistData(playlistID, res) {
         author: item.author.name,
         duration: item.duration.seconds
       }));
+      length += playlist.length;
       // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
       console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
       res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
