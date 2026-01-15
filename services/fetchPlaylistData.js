@@ -16,19 +16,12 @@ async function fetchPlaylistData(playlistID, res) {
       author: item.author.name,
       duration: item.duration.seconds
     }));
-    if (playlistItems.length < 50) {
-        res.write(`\n\n=== Newly Updated Playlist Total Length ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
-    }
-    length += playlistItems.length;
     // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
     console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     // fetch all data until the end
     while (playlist.has_continuation) {
       playlist = await playlist.getContinuation();
-      if (playlistItems.length < 50) {
-        res.write(`\n\n=== Newly Updated Playlist Total Length ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
-      }
       playlistItems = playlist.items.map(item => ({
         id: item.id,
         title: item.title.text,
