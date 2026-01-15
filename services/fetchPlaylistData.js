@@ -32,6 +32,7 @@ async function fetchPlaylistData(playlistID, res) {
       console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
       res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     }
+    res.write(`length: ${JSON.stringify(playlistItems.length)}\n\n`)
     return 'complete'
   } catch (error) {
     console.log(error)
@@ -39,7 +40,6 @@ async function fetchPlaylistData(playlistID, res) {
     res.end();
     return 'playlistFetchFailed'
   }
-  // console.log(playlistItems.length);
 }
 
 // Use ES module export
