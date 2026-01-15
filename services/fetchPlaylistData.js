@@ -16,7 +16,7 @@ async function fetchPlaylistData(playlistID, res) {
       author: item.author.name,
       duration: item.duration.seconds
     }));
-    length += playlist.length;
+    length += playlistItems.length;
     // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
     console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
@@ -30,12 +30,12 @@ async function fetchPlaylistData(playlistID, res) {
         author: item.author.name,
         duration: item.duration.seconds
       }));
-      length += playlist.length;
+      length += playlistItems.length;
       // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
       console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
       res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     }
-    res.write(`length: ${JSON.stringify(playlistItems.length)}\n\n`)
+    res.write(`length: ${JSON.stringify(length)}\n\n`)
     return 'complete'
   } catch (error) {
     console.log(error)
