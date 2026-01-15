@@ -17,7 +17,7 @@ async function fetchPlaylistData(playlistID, res) {
       duration: item.duration.seconds
     }));
     if (playlistItems.length < 100) {
-        res.write(`\n\n=== ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
+        res.write(`\n\n=== Newly Updated Playlist Total Length ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
     }
     length += playlistItems.length;
     // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
@@ -27,7 +27,7 @@ async function fetchPlaylistData(playlistID, res) {
     while (playlist.has_continuation) {
       playlist = await playlist.getContinuation();
       if (playlistItems.length < 100) {
-        res.write(`\n\n=== ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
+        res.write(`\n\n=== Newly Updated Playlist Total Length ${playlist.info.total_items - (100 - playlistItems.length)} ===\n\n`);
       }
       playlistItems = playlist.items.map(item => ({
         id: item.id,
