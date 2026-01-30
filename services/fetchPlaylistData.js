@@ -2,7 +2,6 @@
 import Innertube from "youtubei.js";
 const youtube = await Innertube.create();
 let length = 0;
-const playlistID = "PLbHxd0f6XdHko_QS9nol7nzAxk64NRldc"; // Just for testing
 
 async function fetchPlaylistData(playlistID, res) {
   try {
