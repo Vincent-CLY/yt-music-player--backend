@@ -1,7 +1,22 @@
 import express from "express"
 import fetchPlaylistData from "../services/fetchPlaylistData.js"
+import getPlaylistMetadata from "../services/validatePlaylist.js"
 
 const router = express.Router()
+
+router.get("/validate/:id", async (req, res) => {
+  const playlistId = req.params.id;
+  try {
+    const metadata = await getPlaylistMetadata(playlistId);
+    if (metadata.isValid) {
+      res.json(metadata);
+    } else {
+      res.status(404).json({ isValid: false, message: "Playlist not found or invalid" });
+    }
+  } catch (error) {
+    res.status(500).json({ isValid: false, message: "Internal Server Error" });
+  }
+});
 
 router.get("/playlist/:id", async (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream')

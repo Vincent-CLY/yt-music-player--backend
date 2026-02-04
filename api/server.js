@@ -1,5 +1,5 @@
 import express from "express";
-import fetchPlaylist from "../routes/fetchPlaylist.js";
+import fetchPlaylist from "../routes/playlist.js";
 import debugPlaylist from "../routes/debugPlaylist.js";
 
 const app = express();
