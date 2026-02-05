@@ -15,6 +15,7 @@ export default async function fetchPlaylistData(playlistID, res) {
     res.write(`data: ${JSON.stringify(playlist.info.total_items)}\n\n`)
 
     // Try to resolve the high-quality thumbnail and send it to client
+    console.log("Attempting to fetch high-quality thumbnail...");
     try {
         const hqThumbnail = await thumbnailPromise;
         if (hqThumbnail) {
@@ -22,7 +23,7 @@ export default async function fetchPlaylistData(playlistID, res) {
              res.write(`data: ${JSON.stringify({ thumbnail: hqThumbnail })}\n\n`);
         }
     } catch (e) {
-        console.error("Failed to fetch HQ thumbnail during streaming:", e);
+        console.log("Failed to fetch HQ thumbnail during streaming:", e);
     }
 
     let playlistItems = playlist.items.map(item => ({
