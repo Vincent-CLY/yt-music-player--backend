@@ -33,7 +33,7 @@ export default async function fetchPlaylistData(playlistID, res) {
         return {
           id: video.content_id || video.id || video.video_id,
           title: video.title?.text || video.metadata?.title?.text || "Unavailable Video",
-          thumbnail: video.thumbnails?.[0]?.url || video.content_image?.image?.sources?.[0]?.url || "",
+          thumbnail: video.thumbnails?.[0] || video.content_image?.image?.sources?.[0] || "",
           author: video.author?.name || video.metadata?.author?.name || "Unknown",
           duration: video.duration?.seconds || video.metadata?.duration?.seconds || 0
         };
