@@ -26,17 +26,37 @@ export default async function fetchPlaylistData(playlistID, res) {
         console.log("Failed to fetch HQ thumbnail during streaming:", e);
     }
 
+    const parseTimeToSeconds = (timeStr) => {
+      if (!timeStr || typeof timeStr !== 'string') return 0;
+      const parts = timeStr.split(':').map(Number);
+      if (parts.some(isNaN)) return 0;
+      
+      // MM:SS
+      if (parts.length === 2) {
+        return (parts[0] * 60) + parts[1];
+      }
+      // HH:MM:SS
+      if (parts.length === 3) {
+        return (parts[0] * 3600) + (parts[1] * 60) + parts[2];
+      }
+      return 0;
+    };
+
     const extractAndCount = (rawVideos) => {
       if (!rawVideos) return [];
-      return rawVideos.map(video => {
-        length++;
-        return {
-          id: video.content_id || video.id || video.video_id,
-          title: video.title?.text || video.metadata?.title?.text || "Unavailable Video",
-          thumbnail: video.thumbnails?.[0] || video.content_image?.image?.[0] || "",
-          author: video.author?.name || video.metadata?.metadata?.metadata_rows?.[0]?.metadata_parts?.[0]?.text?.text || "Unknown",
-          duration: video.duration?.text || video.content_image?.overlays?.[0].badges?.[0].text || 0
-        };
+      return rawVideos.flatMap(video => {
+        const videoId = video.content_id || video.id || video.video_id;
+        if (videoId) {
+          length++;
+          return {
+            id: video.content_id || video.id || video.video_id,
+            title: video.title?.text || video.metadata?.title?.text || "Title Unavailable",
+            thumbnail: video.thumbnails?.[0] || video.content_image?.image?.[0] || "Thumbnail Unavailable",
+            author: video.author?.name || video.metadata?.metadata?.metadata_rows?.[0]?.metadata_parts?.[0]?.text?.text || "Unknown",
+            duration: video.duration?.seconds || parseTimeToSeconds(video.content_image?.overlays?.[0].badges?.[0].text) || 0
+          };
+        }
+        return [];
       });
     };
 
