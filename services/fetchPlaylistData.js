@@ -35,7 +35,7 @@ export default async function fetchPlaylistData(playlistID, res) {
           title: video.title?.text || video.metadata?.title?.text || "Unavailable Video",
           thumbnail: video.thumbnails?.[0] || video.content_image?.image?.[0] || "",
           author: video.author?.name || video.metadata?.metadata?.metadata_rows?.[0]?.metadata_parts?.[0]?.text?.text || "Unknown",
-          duration: video.duration?.seconds || video.content_image?.overlays?.[0].badges?.[0].text || 0
+          duration: video.duration?.text || video.content_image?.overlays?.[0].badges?.[0].text || 0
         };
       });
     };
