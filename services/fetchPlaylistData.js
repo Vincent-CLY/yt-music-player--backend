@@ -33,15 +33,15 @@ export default async function fetchPlaylistData(playlistID, res) {
         return {
           id: video.content_id || video.id || video.video_id,
           title: video.title?.text || video.metadata?.title?.text || "Unavailable Video",
-          thumbnail: video.thumbnails?.[0] || video.content_image?.image?.sources?.[0] || "",
-          author: video.author?.name || video.metadata?.author?.name || "Unknown",
-          duration: video.duration?.seconds || video.metadata?.duration?.seconds || 0
+          thumbnail: video.thumbnails?.[0] || video.content_image?.image?.[0] || "",
+          author: video.author?.name || video.metadata?.metadata?.metadata_rows?.[0]?.metadata_parts?.[0]?.text?.text || "Unknown",
+          duration: video.duration?.seconds || video.content_image?.overlays?.[0].badges?.[0].text || 0
         };
       });
     };
 
     let playlistItems = extractAndCount(playlist.videos);
-    // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
+    console.log(`data: ${JSON.stringify(playlistItems)}\n\n`);
     console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     // fetch all data until the end
