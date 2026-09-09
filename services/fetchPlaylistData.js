@@ -3,10 +3,10 @@ import Innertube from "youtubei.js";
 import scrapePlaylistThumbnail from "./scrapeService.js";
 
 const youtube = await Innertube.create();
-let length = 0;
 
 export default async function fetchPlaylistData(playlistID, res) {
   try {
+    let length = 0;
     // Start scraping high-quality thumbnail in background
     const thumbnailPromise = scrapePlaylistThumbnail(playlistID);
 
@@ -26,27 +26,28 @@ export default async function fetchPlaylistData(playlistID, res) {
         console.log("Failed to fetch HQ thumbnail during streaming:", e);
     }
 
-    let playlistItems = playlist.items.map(item => ({
-      id: item.id,
-      title: item.title.text,
-      thumbnail: item.thumbnails[0],
-      author: item.author.name,
-      duration: item.duration.seconds
-    }));
+    const extractAndCount = (rawVideos) => {
+      if (!rawVideos) return [];
+      return rawVideos.map(video => {
+        length++;
+        return {
+          id: video.content_id || video.id || video.video_id,
+          title: video.title?.text || video.metadata?.title?.text || "Unavailable Video",
+          thumbnail: video.thumbnails?.[0]?.url || video.content_image?.image?.sources?.[0]?.url || "",
+          author: video.author?.name || video.metadata?.author?.name || "Unknown",
+          duration: video.duration?.seconds || video.metadata?.duration?.seconds || 0
+        };
+      });
+    };
+
+    let playlistItems = extractAndCount(playlist.videos);
     // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)s
     console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
     res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
     // fetch all data until the end
     while (playlist.has_continuation) {
       playlist = await playlist.getContinuation();
-      playlistItems = playlist.items.map(item => ({
-        id: item.id,
-        title: item.title.text,
-        thumbnail: item.thumbnails[0],
-        author: item.author.name,
-        duration: item.duration.seconds
-      }));
-      length += playlistItems.length;
+      playlistItems = extractAndCount(playlist.videos);
       // console.log(`data: ${JSON.stringify(playlistItems)}\n\n`)
       console.log(`[Batch Sent] ${playlistItems.length} items sent to client.`);
       res.write(`data: ${JSON.stringify(playlistItems)}\n\n`)
